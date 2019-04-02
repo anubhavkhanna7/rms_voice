@@ -4,15 +4,12 @@ class HomeController < ApplicationController
   end
   
   def create
-    p '*' * 100;
-    p params
     @data = Hospital.new(data_items)
- 
     @data.save
-    redirect_to @data
+    # redirect_to home_path(@data)
   end
   private
-    def data_items
-      params.require(:hospital).permit(:hospitalId, :patientId, :patientName, :hospitalName, :hospitalAddr, :phnum, :country, :city, :state, :county, :zip)
-    end
+  def data_items
+    params.permit(*Hospital.new.attributes.keys)
+  end
 end

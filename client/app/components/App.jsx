@@ -11,6 +11,7 @@ class App extends React.Component {
     hospitalName: '', hospitalAddress: '', phoneNum: '', country: '', city: '', state: '', county: '', zip: '' };
     this.recognition = new SpeechRecognitionService();
     this.processor = new SpeechProcessorService();
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   startRecording = () => {
@@ -137,22 +138,24 @@ class App extends React.Component {
   }
 
   handleFormSubmit(event) {
-    console.log('staaa');
-    // sconsole.log('staaa', this.state.recording);
-    debugger;
+    // debugger;
     event.preventDefault();
-    const attributes = {};
-    attributes["hospitalId"] = this.state.providerId;
-    attributes["patientId"] = this.state.patientId;
-    attributes["patientName"] = this.state.patientName;
-    attributes["hospitalName"] = this.state.hospitalName;
-    attributes["hospitalAddr"] = this.state.hospitalAddress;
-    attributes["phnum"] = this.state.phoneNum;
-    attributes["country"] = this.state.country;
-    attributes["city"] =this.state.city;
-    attributes["state"] = this.state.state;
-    attributes["county"] = this.state.county;
-    attributes["zip"] = this.state.zip;
+    console.log(this.state.state);
+    console.log(this.state.city);
+    console.log(this.state.hospitalAddress);
+    const attributes = {
+    hospitalId : this.state.providerId,
+    patientId : this.state.patientId,
+    patientName : this.state.patientName,
+    hospitalName : this.state.hospitalName,
+    hospitalAddr : this.state.hospitalAddress,
+    phnum : this.state.phoneNum,
+    country : this.state.country,
+    city : this.state.city,
+    state : this.state.state,
+    county: this.state.county,
+    zip: this.state.zip
+    };
     var data = attributes;
     const promiseObject = asyncHandler('/home', 'POST', data);
     promiseObject.then(() => {
