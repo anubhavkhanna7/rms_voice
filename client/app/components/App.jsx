@@ -2,16 +2,15 @@ import * as React from 'react';
 import './App.css';
 import SpeechRecognitionService from './speechRecognitionService';
 import SpeechProcessorService from './speechProcessorService';
-
+import asyncHandler from './asyncHandler';
 class App extends React.Component {
 
   constructor() {
     super();
     this.state = { recording: false, result: '', providerId: '', patientId: '', patientName: '', 
-    hospitalName: '', hospitalAddress: '', phoneNum: '', city: 'tryout', state: '', county: '', zip: '' };
+    hospitalName: '', hospitalAddress: '', phoneNum: '', country: '', city: '', state: '', county: '', zip: '' };
     this.recognition = new SpeechRecognitionService();
     this.processor = new SpeechProcessorService();
-    console.log(this.state.city);
   }
 
   startRecording = () => {
@@ -137,8 +136,34 @@ class App extends React.Component {
     }
   }
 
-  onTodoChange(value,feild){
-    switch(feild) {
+  handleFormSubmit(event) {
+    console.log('staaa');
+    // sconsole.log('staaa', this.state.recording);
+    debugger;
+    event.preventDefault();
+    const attributes = {};
+    attributes["hospitalId"] = this.state.providerId;
+    attributes["patientId"] = this.state.patientId;
+    attributes["patientName"] = this.state.patientName;
+    attributes["hospitalName"] = this.state.hospitalName;
+    attributes["hospitalAddr"] = this.state.hospitalAddress;
+    attributes["phnum"] = this.state.phoneNum;
+    attributes["country"] = this.state.country;
+    attributes["city"] =this.state.city;
+    attributes["state"] = this.state.state;
+    attributes["county"] = this.state.county;
+    attributes["zip"] = this.state.zip;
+    var data = attributes;
+    const promiseObject = asyncHandler('/home', 'POST', data);
+    promiseObject.then(() => {
+      // Nothing to do here
+    }, () => {
+      // Nothing to do here
+    });
+  }
+
+  onTodoChange(value,field){
+    switch(field) {
       case 'pId':
         this.setState({patientId: value});
         break;
@@ -157,6 +182,9 @@ class App extends React.Component {
       case 'hAddr' :
          this.setState({hospitalAddress :value});
          break;
+      case 'country':
+        this.setState({country: value});
+        break;
       case 'city':
         this.setState({city: value});
         break;
@@ -169,7 +197,7 @@ class App extends React.Component {
       case 'zip':
         this.setState({zip: value});
         break;
-        default : 
+      default : 
         break;
     }
   }
@@ -204,6 +232,9 @@ class App extends React.Component {
                 <label className="labelText">Phone Number: </label><br /><br /> 
               </div>
               <div className="row">
+                <label className="labelText">Country: </label><br /><br />
+              </div>
+              <div className="row">
                 <label className="labelText">City: </label><br /><br />
               </div>
               <div className="row">
@@ -218,7 +249,8 @@ class App extends React.Component {
               
             </div>
             <div className="column">
-              <form>
+              <form onSubmit= {this.handleFormSubmit} >
+              
               <div className="row">
                   <input id="hospitalId" value={this.state.providerId} onChange={e => this.onTodoChange(e.target.value,'hId')}/> <br /> <br /> 
                 </div>
@@ -238,6 +270,9 @@ class App extends React.Component {
                   <input id="phnum" value={this.state.phoneNum} onChange={e => this.onTodoChange(e.target.value,'phnum')}/> <br /> <br /> 
                 </div>
                 <div className="row">
+                  <input id="country" value={this.state.country} onChange={e => this.onTodoChange(e.target.value,'country')}/> <br /> <br /> 
+                </div>
+                <div className="row">
                   <input id="city" value={this.state.city} onChange={e => this.onTodoChange(e.target.value,'city')}/> <br /> <br /> 
                 </div>
                 <div className="row">
@@ -251,7 +286,7 @@ class App extends React.Component {
                 </div>
                 <br />
                 <div className="row">
-                  <input id="submit" className="submit" value="Submit"/> <br /> <br /> 
+                  <button id="submit" className="submit" value="submit" >Submit</button> <br /> <br /> 
                 </div>
               </form>
             </div>

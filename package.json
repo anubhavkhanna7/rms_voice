@@ -12,5 +12,8 @@
     "webpack": "^4.20.2",
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.2.1"
+  },
+  "dependencies": {
+    "react-rails-form-helpers": "^0.1.0-beta.16"
   }
 }

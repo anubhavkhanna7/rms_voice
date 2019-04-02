@@ -9,7 +9,7 @@ default: &default
   check_yarn_integrity: false
   webpack_compile_output: false
   server:
-    hmr: false
+    hmr: true
 
   # Additional paths webpack should lookup modules
   # ['app/assets', 'engine/foo/app/assets']
