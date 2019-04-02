@@ -45,16 +45,12 @@ class App extends React.Component {
   // used to split the transcript and input the info into fields
   speechProcessing(splittedValue) {
     var tempStringholder = '';
-    
     var foundAttribute = 0;
     for (let i = 0; i < splittedValue.length; i++) {
-      
       if ( splittedValue[i] !== '...' ) {
-        
         if (splittedValue[i] === 'Provider' || splittedValue[i] === 'provider') {
           i += 1;
           foundAttribute = 1;
-          
         } else if (splittedValue[i] === 'Patient' || splittedValue[i] === 'patient') {
           i += 1;
           if (splittedValue[i] === 'Id' || splittedValue[i] === 'id' || splittedValue[i] === 'ID') {
@@ -62,7 +58,6 @@ class App extends React.Component {
           } else {
             foundAttribute = 3;
           }
-
         } else if (splittedValue[i] === 'Hospital' || splittedValue[i] === 'hospital') {
           i += 1;
           if (splittedValue[i] === 'Name' || splittedValue[i] === 'name') {
@@ -70,17 +65,13 @@ class App extends React.Component {
           } else {
             foundAttribute = 5;
           }
-
         } else if (splittedValue[i] === 'Phone' || splittedValue[i] === 'phone') {
           i += 1;
           foundAttribute = 6;
-          
         } else if (splittedValue[i] === 'City' || splittedValue[i] === 'city') {
           foundAttribute = 7;
-          
         } else if (splittedValue[i] === 'State' || splittedValue[i] === 'state') {
           foundAttribute = 8;
-          
         } else if (splittedValue[i] === 'County' || splittedValue[i] === 'county') {
           foundAttribute = 9;
         } else if (splittedValue[i] === 'Zip' || splittedValue[i] === 'zip') {
@@ -88,7 +79,6 @@ class App extends React.Component {
         } else {
           foundAttribute = 0;          
         }
-        
         while ( i < splittedValue.length ) {
           i += 1;
           if ( splittedValue[i] !== undefined && splittedValue[i] !== 'undefined' ) {
@@ -126,7 +116,6 @@ class App extends React.Component {
     }
   }
 
-  // componentDidUpdate() { }
   speechTranscriptSplitting() {
     if (this.state.result !== undefined && this.state.recording === true) {
       var splitText = this.state.result.split(' ', 30);
@@ -138,11 +127,7 @@ class App extends React.Component {
   }
 
   handleFormSubmit(event) {
-    // debugger;
     event.preventDefault();
-    console.log(this.state.state);
-    console.log(this.state.city);
-    console.log(this.state.hospitalAddress);
     const attributes = {
     hospitalId : this.state.providerId,
     patientId : this.state.patientId,
@@ -157,7 +142,7 @@ class App extends React.Component {
     zip: this.state.zip
     };
     var data = attributes;
-    const promiseObject = asyncHandler('/home', 'POST', data);
+    const promiseObject = asyncHandler('/hospital', 'POST', data);
     promiseObject.then(() => {
       // Nothing to do here
     }, () => {

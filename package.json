@@ -1,5 +1,5 @@
 {
-  "name": "hungry_bird",
+  "name": "rms_voice",
   "private": true,
   "scripts": {
     "lint": "cd client && yarn run lint",

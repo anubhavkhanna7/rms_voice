@@ -1,5 +1,5 @@
 {
-  "name": "analytics_query_tool",
+  "name": "rms_voice",
   "private": true,
   "scripts": {
     "build:test": "NODE_ENV=test webpack --config webpack.config.js --mode none",

@@ -1,12 +1,15 @@
 import ReactOnRails from 'react-on-rails';
 import $ from 'jquery';
 import HelloWorld from './components/HelloWorld';
-import App from './components/App'
+import App from './components/hospital_patient/App'
+import Index from './components/index'
+
 
 // This is how react_on_rails can see the HelloWorld in the browser.
 ReactOnRails.register({
   HelloWorld,
-  App
+  App,
+  Index
 });
 
 
