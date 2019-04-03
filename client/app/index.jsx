@@ -1,8 +1,8 @@
 import ReactOnRails from 'react-on-rails';
 import $ from 'jquery';
 import HelloWorld from './components/HelloWorld';
-import App from './components/hospital_patient/App'
-import Index from './components/index'
+import App from './components/hospital_new/App'
+import Index from './components/hospital_login/index'
 
 
 // This is how react_on_rails can see the HelloWorld in the browser.
