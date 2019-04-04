@@ -21,9 +21,7 @@ class App extends React.Component {
         this.speechTranscriptSplitting();
         
       }
-       console.log(result);
       this.setState({ result });
-
       this.speechTranscriptSplitting();
     });
     this.recognition.onEnd(() => {
@@ -84,9 +82,7 @@ class App extends React.Component {
           if ( splittedValue[i] !== undefined && splittedValue[i] !== 'undefined' ) {
             tempStringholder += splittedValue[i];
           }
-          
         }
-
         if (foundAttribute === 1 && (this.state.providerId === '' || this.state.providerId === undefined)) {
           this.setState({providerId: tempStringholder});
         } else if (foundAttribute === 2 && (this.state.patientId === '' || this.state.patientId === undefined)) {
@@ -112,20 +108,16 @@ class App extends React.Component {
           foundAttribute = 0;
         }
       }
-      
     }
   }
-
   speechTranscriptSplitting() {
     if (this.state.result !== undefined && this.state.recording === true) {
       var splitText = this.state.result.split(' ', 30);
       if (splitText.length !== 1) {
         this.speechProcessing(splitText);
       }      
-      
     }
   }
-
   handleFormSubmit(event) {
     event.preventDefault();
     const attributes = {
@@ -149,7 +141,6 @@ class App extends React.Component {
       // Nothing to do here
     });
   }
-
   onTodoChange(value,field){
     switch(field) {
       case 'pId':
@@ -189,21 +180,26 @@ class App extends React.Component {
         break;
     }
   }
-
   render() {
     return (
       <div id="background">
         <video autoPlay muted loop id="myVideo">
             <source src="https://i.imgur.com/opAFou0.mp4" type="video/mp4" />
         </video>
+        <div className="navbar">
+            <a href="/home/index">Search</a> 
+            <a className="active" href="/index">New Patient</a>
+            <button onClick="login/new"> Logout </button>
+            <text> Edwards,Abraham </text>
+        </div>
         <div className="form">
           <form onSubmit= {this.handleFormSubmit} >
           <h1> Patient Information</h1>
             <input id="hospitalId" placeholder="Hospital Id" value={this.state.providerId} type="text"  onChange={e => this.onTodoChange(e.target.value,'hId')}/> 
-            <input id="patientId" placeholder="Patient Id" value={this.state.patientId} type="text"  onChange={e => this.onTodoChange(e.target.value,'pId')}/> 
-            <input id="patientName" placeholder="Patient Name" value={this.state.patientName} type="text"  onChange={e => this.onTodoChange(e.target.value,'pName')}/> 
             <input id="hospitalName" placeholder="Hospital Name" value={this.state.hospitalName} type="text"  onChange={e => this.onTodoChange(e.target.value,'hName')}/> 
             <input id="hospitalAddr" placeholder="Hospital Address" value={this.state.hospitalAddress} type="text" onChange={e => this.onTodoChange(e.target.value,'hAddr')}/> 
+            <input id="patientId" placeholder="Patient Id" value={this.state.patientId} type="text"  onChange={e => this.onTodoChange(e.target.value,'pId')}/> 
+            <input id="patientName" placeholder="Patient Name" value={this.state.patientName} type="text"  onChange={e => this.onTodoChange(e.target.value,'pName')}/> 
             <input id="phnum" placeholder="Phone Number" value={this.state.phoneNum} type="text" onChange={e => this.onTodoChange(e.target.value,'phnum')}/>  
             <input id="country" placeholder="Country" value={this.state.country} type="text" onChange={e => this.onTodoChange(e.target.value,'country')}/> 
             <input id="city" placeholder="City"value={this.state.city} type="text" onChange={e => this.onTodoChange(e.target.value,'city')}/>  

@@ -9,6 +9,16 @@ form {
   margin: 0 auto;
   margin-top: 20px;
 }
+
+h1{
+	background: rgb(67, 81, 209);
+	padding: 20px 0;
+	font-size: 140%;
+	font-weight: 300;
+	text-align: center;
+	color: #fff;
+	margin: -16px -16px 16px -16px;
+}
 label {
   color: #555;
   display: inline-block;

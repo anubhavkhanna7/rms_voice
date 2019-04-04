@@ -1,16 +1,16 @@
 import * as React from 'react';
 import './index.css';
 
-export default class Index extends React.Component {
+export default class Login extends React.Component {
   constructor() {
     super();
   }
   render() {
     return (
       <div id = "background">
-          <video autoPlay muted loop id="myVideo">
-            <source src="https://i.imgur.com/opAFou0.mp4" type="video/mp4" />
-          </video>
+        <video autoPlay muted loop id="myVideo">
+          <source src="https://i.imgur.com/opAFou0.mp4" type="video/mp4" />
+        </video>
         <div id="container">     
           <form>
             <label for="username">Username:</label>
