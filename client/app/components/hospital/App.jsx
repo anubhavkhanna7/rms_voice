@@ -1,13 +1,16 @@
 import * as React from 'react';
 import './App.css';
+import PropTypes from 'prop-types';
 import SpeechRecognitionService from './speechRecognitionService';
 import SpeechProcessorService from './speechProcessorService';
 import asyncHandler from './asyncHandler';
 class App extends React.Component {
-
-  constructor() {
-    super();
-    this.state = { recording: false, result: '', providerId: '', patientId: '', patientName: '', 
+  static propTypes = {
+    username: PropTypes.string.isRequired // this is passed from the Rails view
+  };
+  constructor(props) {
+    super(props);
+    this.state = { recording: false, result: '', username: this.props.username, providerId: '', patientId: '', patientName: '', 
     hospitalName: '', hospitalAddress: '', phoneNum: '', country: '', city: '', state: '', county: '', zip: '' };
     this.recognition = new SpeechRecognitionService();
     this.processor = new SpeechProcessorService();
@@ -181,6 +184,7 @@ class App extends React.Component {
     }
   }
   render() {
+    console.log("this.state.username", this.props.username);
     return (
       <div id="background">
         <video autoPlay muted loop id="myVideo">
@@ -189,8 +193,8 @@ class App extends React.Component {
         <div className="navbar">
             <a href="/home/index">Search</a> 
             <a className="active" href="/index">New Patient</a>
-            <button onClick="login/new"> Logout </button>
-            <text> Edwards,Abraham </text>
+            <button > Logout </button>
+            <label value= {this.state.username} /> 
         </div>
         <div className="form">
           <form onSubmit= {this.handleFormSubmit} >

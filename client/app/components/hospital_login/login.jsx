@@ -1,9 +1,35 @@
 import * as React from 'react';
 import './index.css';
-
+import App from '../hospital/App';
+import asyncHandler from '../hospital/asyncHandler';
 export default class Login extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = { username: '', password: ''};
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
+  }
+  onTodoChange(value, field){
+    if(field === "uname") {
+      this.setState({username: value});
+    } else {
+      this.setState({password: value});
+    }
+    
+  }
+  handleFormSubmit(event) {
+    event.preventDefault();
+    var data = {employeeId: this.state.username, password: this.state.password};
+    const promiseObject = asyncHandler('/login', 'GET', data);
+    promiseObject.then((results) => {
+      var details = (Object.values(results));
+      console.log("got results ",details);
+      // debugger; 
+      
+    }, (error) => {
+      console.log(error);
+      // Nothing to do here
+    });
+    window.location.assign('/hospital/index/', this.state.username);  
   }
   render() {
     return (
@@ -12,13 +38,12 @@ export default class Login extends React.Component {
           <source src="https://i.imgur.com/opAFou0.mp4" type="video/mp4" />
         </video>
         <div id="container">     
-          <form>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" />
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" />
+          <form onSubmit= {this.handleFormSubmit}>
+            <label >Username:</label>
+            <input id="username" placeholder="User Name" value={this.state.username} type="text"  onChange={e => this.onTodoChange(e.target.value,"uname")} />
+            <label >Password:</label>
+            <input type="password" value={this.state.password} onChange={e => this.onTodoChange(e.target.value,"pass")} placeholder="Password" id="password" name="password" />
             <div id="lower">
-                <input type="checkbox" id="checkbox"/><label for="checkbox">Keep me logged in</label>
                 <input type="submit" value="Login" />
             </div>
           </form>

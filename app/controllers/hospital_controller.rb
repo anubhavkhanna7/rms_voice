@@ -1,6 +1,7 @@
 class HospitalController < ApplicationController
   protect_from_forgery 
   def index
+    @username = { username: "null" }
   end
   
   def create
