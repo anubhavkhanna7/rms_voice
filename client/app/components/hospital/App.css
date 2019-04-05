@@ -86,7 +86,7 @@
   margin-top: 20px;
 }
 .record {
-    width: 42%;
+    width: 57%;
     background-color: rgb(175, 76, 76);
     color: white;
     padding: 14px ;
@@ -95,7 +95,7 @@
     cursor: pointer;
   }
 .submit {
-  width: 42%;
+  width: 57%;
   background-color: rgb(104, 216, 94);
   color: white;
   padding: 14px ;
@@ -107,11 +107,9 @@
 
 .submit:hover {
   background-color: #53c21f;
-  width: 42%;
 }
 .record:hover {
     background-color: #c21f1f;
-    width: 42%;
   }
 @keyframes App-logo-spin {
     from { transform: rotate(0deg); }

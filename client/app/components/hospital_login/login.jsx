@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
 import App from '../hospital/App';
 import asyncHandler from '../hospital/asyncHandler';
@@ -23,13 +24,14 @@ export default class Login extends React.Component {
     promiseObject.then((results) => {
       var details = (Object.values(results));
       console.log("got results ",details);
-      // debugger; 
-      
+      ReactDOM.render(<App username= {this.state.username} />, document.body);
     }, (error) => {
       console.log(error);
       // Nothing to do here
     });
-    window.location.assign('/hospital/index/', this.state.username);  
+    //window.location.assign('/hospital/index/', this.state.username);  
+
+    return (<App username={this.state.username} />);
   }
   render() {
     return (

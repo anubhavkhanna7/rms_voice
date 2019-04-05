@@ -6,7 +6,7 @@ import SpeechProcessorService from './speechProcessorService';
 import asyncHandler from './asyncHandler';
 class App extends React.Component {
   static propTypes = {
-    username: PropTypes.string.isRequired // this is passed from the Rails view
+    username: PropTypes.string.isRequired 
   };
   constructor(props) {
     super(props);
@@ -194,7 +194,7 @@ class App extends React.Component {
             <a href="/home/index">Search</a> 
             <a className="active" href="/index">New Patient</a>
             <button > Logout </button>
-            <label value= {this.state.username} /> 
+            <label >{this.props.username} </label>/> 
         </div>
         <div className="form">
           <form onSubmit= {this.handleFormSubmit} >
