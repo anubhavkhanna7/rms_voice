@@ -1,5 +1,6 @@
 import * as React from 'react';
 import './App.css';
+import Search from './index';
 import PropTypes from 'prop-types';
 import SpeechRecognitionService from './speechRecognitionService';
 import SpeechProcessorService from './speechProcessorService';
@@ -140,7 +141,7 @@ class App extends React.Component {
     const promiseObject = asyncHandler('/hospital', 'POST', data);
     promiseObject.then(() => {
       // Nothing to do here
-    }, () => {
+    }, (error) => {
       // Nothing to do here
     });
   }
@@ -183,18 +184,20 @@ class App extends React.Component {
         break;
     }
   }
+  render_search() {
+    return(<Search username= {this.state.username} />);
+  }
   render() {
-    console.log("this.state.username", this.props.username);
     return (
       <div id="background">
         <video autoPlay muted loop id="myVideo">
             <source src="https://i.imgur.com/opAFou0.mp4" type="video/mp4" />
         </video>
         <div className="navbar">
-            <a href="/home/index">Search</a> 
-            <a className="active" href="/index">New Patient</a>
+            <a onClick={this.render_search}>Search </a> 
+            <a className="active" > New Patient </a>
             <button > Logout </button>
-            <label >{this.props.username} </label>/> 
+            <label >{this.props.username} </label>
         </div>
         <div className="form">
           <form onSubmit= {this.handleFormSubmit} >

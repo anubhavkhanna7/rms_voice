@@ -1,11 +1,18 @@
 import * as React from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
+import App from './App';
+import PropTypes from 'prop-types';
 import SpeechRecognitionService from './speechRecognitionService';
 import SpeechProcessorService from './speechProcessorService';
+
 export default class Search extends React.Component {
-  constructor() {
-    super();
-    this.state = { recording: false, result: '', patientName: '', phoneNum: '', country: '', city: '', state: '', zip: '' };
+  static propTypes = {
+    username: PropTypes.string.isRequired 
+  };
+  constructor(props) {
+    super(props);
+    this.state = { recording: false, result: '', username: this.props.username, patientName: '', phoneNum: '', country: '', city: '', state: '', zip: '' };
     this.recognition = new SpeechRecognitionService();
     this.processor = new SpeechProcessorService();
   }
@@ -29,7 +36,6 @@ export default class Search extends React.Component {
     this.recognition.stop();
   }
   toggleRecording = () => {
-    debugger;
     this.state.recording ? this.stopRecording() : this.startRecording();
   }
   speechProcessing(splittedValue) {
@@ -108,19 +114,22 @@ export default class Search extends React.Component {
         break;
     }
   }
-
+  render_form() {
+    ReactDOM.render(<App username= {this.state.username} />, document.body);
+    
+  }
   render() {
     
     return (
-      <div id="background" >
+      <div id="background">
         <video autoPlay muted loop id="myVideo">
-          <source src="https://i.imgur.com/opAFou0.mp4" type="video/mp4" />
+          <source src="https://i.imgur.com/opAFou0.mp4" type="video/mp4"/>
         </video>
         <div className="navbar">
-          <a className="active" href="home/index"> Search </a> 
-          <a href="/hospital/index"> New Patient </a> 
+          <a className="active"> Search </a> 
+          <a onclick={this.render_form()}> New Patient </a> 
           <button > Logout </button>
-          <label> Edwards,Abraham </label>
+          <label> {this.props.username} </label>
         </div>
         <div className="sidenav">
           <form >
@@ -134,7 +143,7 @@ export default class Search extends React.Component {
           </form>
           <button className="record" onClick={this.toggleRecording}>
               {this.state.recording ? 'Recording' : 'Record'} </button>
-         </div>        
+        </div>        
       </div>
     );      
   }

@@ -22,16 +22,12 @@ export default class Login extends React.Component {
     var data = {employeeId: this.state.username, password: this.state.password};
     const promiseObject = asyncHandler('/login', 'GET', data);
     promiseObject.then((results) => {
-      var details = (Object.values(results));
-      console.log("got results ",details);
+      // var details = (Object.values(results));
+      // console.log("got results ",details);
       ReactDOM.render(<App username= {this.state.username} />, document.body);
     }, (error) => {
-      console.log(error);
-      // Nothing to do here
+      alert("Wrong details entered");
     });
-    //window.location.assign('/hospital/index/', this.state.username);  
-
-    return (<App username={this.state.username} />);
   }
   render() {
     return (
